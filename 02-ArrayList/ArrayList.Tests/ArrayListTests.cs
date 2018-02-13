@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Training02.Tests
 {
@@ -148,6 +149,27 @@ namespace Training02.Tests
 
             // Assert
             Assert.AreEqual("[a,b,e,c,d,,,]", ArrayList.ToString());
+        }
+
+        [TestMethod]
+        public void InsertAt_ShouldThrowExceptonWhenInsertingInEmptyList()
+        {
+            Assert.ThrowsException<InvalidOperationException>(() => ArrayList.InsertAt(0, "e"), 
+                "Attempting to insert an item to an empty list.");
+        }
+
+        [TestMethod]
+        public void InsertAt_ShouldThrowAnExceptionWhenInsertingAnItemAtAnOutOfRangeIndex()
+        {
+            //Arrange
+            ArrayList.Add("a");
+            ArrayList.Add("b");
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => ArrayList.InsertAt(-1, "c"),
+                "Index is out of range should throw an exception");
+
+            Assert.ThrowsException<IndexOutOfRangeException>(() => ArrayList.InsertAt(4, "c"),
+                "Index is out of range should throw an exception");
         }
     }
 }

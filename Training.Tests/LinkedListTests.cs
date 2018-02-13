@@ -172,7 +172,8 @@ namespace Training.Tests
             LinkedList.Add(2);
             LinkedList.Add(3);
 
-            Assert.ThrowsException<InvalidOperationException>(() => LinkedList.Remove(4), "Attempting to remove an item not in the list should throw an exception.");
+            Assert.ThrowsException<InvalidOperationException>(() => LinkedList.Remove(4), 
+                "Attempting to remove an item not in the list should throw an exception.");
         }
 
         [TestMethod]
@@ -225,7 +226,7 @@ namespace Training.Tests
         public void InsertAt_ShouldThrowAnExceptionWhenAttemptingToInsertAnItemToAnEmptyList()
         {
             Assert.ThrowsException<ArgumentNullException>(() => LinkedList.InsertAt(0, 1),
-                "Attempting to insert and item to an empty list.");
+                "Attempting to insert an item to an empty list.");
         }
 
         [TestMethod]
