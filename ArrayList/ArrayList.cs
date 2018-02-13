@@ -88,6 +88,12 @@ namespace Training02
         /// <param name="item"></param>
         public void InsertAt(int index, string item)
         {
+            // When inserting at an out of range index
+            if (index < 0 || index > Count) throw new IndexOutOfRangeException("Index is out of range should throw an exception");
+
+            // When inserting to an empty list & index is zero
+            if (Count == 0 && index == 0) throw new InvalidOperationException("Attempting to insert an item to an empty list.");
+
             // Add to last index
             if (index == Count)
             {
@@ -95,6 +101,11 @@ namespace Training02
             }
             else
             {
+                if (Count > _internalArray.Length - 1)
+                {
+                    DoubleArraySize();
+                }
+
                 // iterate backward on array from Count to the index where inserting at + 1, and move each item forward.
                 for (var i = Count; i >= index - 1; i--)
                 {
@@ -105,11 +116,6 @@ namespace Training02
                     else
                     {
                         if (i == -1 || i == 0 || i < index) return;
-
-                        if (Count > _internalArray.Length - 1)
-                        {
-                            DoubleArraySize();
-                        }
 
                         //set current array index to what was in the index before it until insertion point is reached.
                         _internalArray[i] = _internalArray[i - 1];
